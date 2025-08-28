@@ -36,7 +36,7 @@ JavaScript – Dynamic interactions, cart functionality, and animations.
 
 Clone the repository
 
-git clone https://github.com/yourusername/pandora-ecommerce.git
+git clone [https://github.com/yourusername/pandora-ecommerce.git](https://jenidevops.github.io/Pandora-E-commerce-Website/)
 
 
 Open the project folder
