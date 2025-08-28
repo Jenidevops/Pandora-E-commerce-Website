@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - Pandora</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Fade-in */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Floating icons */
+    .floating-icon {
+      position: absolute;
+      opacity: 0.85;
+      filter: brightness(2.5) drop-shadow(0 0 6px white);
+      pointer-events: none;
+    }
+
+    /* Slow, gentle floats */
+    @keyframes floatVertical {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(120deg); }
+      100% { transform: translateY(0) rotate(240deg); }
+    }
+    @keyframes floatBottom {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(20px, -15px) rotate(120deg); }
+      100% { transform: translate(0, 0) rotate(240deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 relative">
+
+<!-- Navbar -->
+  <header class="bg-white shadow-md fixed w-full z-50">
+    <div class="container mx-auto flex justify-between items-center py-5 px-6">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+        Pandora
+      </h1>
+      <div class="hidden md:block w-1/3">
+        <input id="searchBar" type="text" placeholder="Search products..." class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
+      </div>
+      <nav class="hidden md:flex space-x-8 text-lg font-semibold">
+        <a href="/index.html" class="hover:text-blue-600">Home</a>
+        <a href="/shop.html" class="hover:text-blue-600">Shop</a>
+        <a href="/about.html" class="text-blue-600">About</a>
+        <a href="/contact.html" class="hover:text-blue-600">Contact</a>
+      </nav>
+      <div class="flex items-center space-x-6">
+        <button id="cartBtn" class="relative text-2xl">🛒
+          <span id="cartCount" class="absolute -top-2 -right-3 bg-red-600 text-white text-sm rounded-full px-2">0</span>
+        </button>
+        <button id="menuBtn" class="md:hidden text-3xl">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md">
+      <div class="p-4">
+        <input id="searchBarMobile" type="text" placeholder="Search products..." class="w-full px-4 py-2 border rounded-lg mb-4">
+      </div>
+      <nav class="flex flex-col p-4 space-y-3 text-lg font-semibold">
+        <a href="/index.html" class="hover:text-blue-600">Home</a>
+        <a href="/shop.html" class="hover:text-blue-600">Shop</a>
+        <a href="/about.html" class="text-blue-600">About</a>
+        <a href="/contact.html" class="hover:text-blue-600">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+ <!-- Cart Drawer -->
+<div id="cartDrawer" class="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform z-50 rounded-l-xl flex flex-col">
+  <div class="flex justify-between items-center p-5 border-b">
+    <h2 class="text-2xl font-bold">🛍 Shopping Cart</h2>
+    <button id="closeCart" class="text-gray-600 hover:text-gray-900 text-3xl">&times;</button>
+  </div>
+  <div id="cartItems" class="p-5 space-y-4 overflow-y-auto flex-1">
+    <p class="text-gray-500">Your cart is empty.</p>
+  </div>
+  <div class="p-5 border-t">
+    <div class="flex justify-between mb-4">
+      <span class="font-semibold text-lg">Total:</span>
+      <span id="cartTotal" class="font-bold text-lg">$0.00</span>
+    </div>
+    <button id="checkoutBtn" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg text-lg font-semibold hover:opacity-90 transition">
+      Checkout
+    </button>
+  </div>
+</div>
+<div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-40 hidden z-40"></div>
+
+
+  <!-- ABOUT SECTION (kept same layout/content) -->
+  <section class="relative pt-32 min-h-screen">
+    <!-- Background -->
+    <div class="absolute inset-0">
+      <img src="./img/others/newsfashion.png" alt="Fashion Background" class="w-full h-full object-cover">
+      <div class="absolute inset-0 bg-white bg-opacity-80"></div>
+    </div>
+
+    <!-- Floating Icons (side + bottom, slow, non-overlapping) -->
+    <div id="iconsContainer" class="pointer-events-none absolute inset-0 z-10"></div>
+
+<!-- About Section -->
+<section class="relative container mx-auto px-6 py-16 text-center space-y-8 fade-in z-20">
+  <h1 class="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+    About Pandora
+  </h1>
+  <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-800 font-medium">
+    Pandora is your ultimate fashion destination, blending style, creativity, and an immersive shopping experience. 
+    Explore our curated collection of apparel, footwear, and accessories designed to inspire and elevate your everyday style.
+  </p>
+  <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-800 font-medium">
+    Our mission is to empower shoppers with confidence and elegance. Built with HTML, TailwindCSS, and JavaScript, 
+    Pandora delivers seamless navigation, dynamic product search, and an enjoyable shopping experience on any device.
+  </p>
+  <a href="shop.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90 px-8 py-4 rounded-2xl text-white font-semibold text-lg transition shadow-lg hover:shadow-2xl">
+    Explore Our Collection
+  </a>
+</section>
+
+   <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12 mt-16">
+    <div class="container mx-auto text-center">
+      <h4 class="text-xl font-semibold mb-4">Pandora</h4>
+      <p class="mb-2">&copy; 2025 Pandora. All rights reserved.</p>
+      <p class="text-gray-400">Designed with ❤️ for fashion lovers.</p>
+    </div>
+  </footer>
+
+ <script>
+  /* Fade-in */
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => io.observe(el));
+
+  /* Mobile menu toggle (works on all sizes) */
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  }
+
+  /* Cart drawer behavior */
+  const cartBtn = document.getElementById('cartBtn');
+  const cartDrawer = document.getElementById('cartDrawer');
+  const closeCart = document.getElementById('closeCart');
+  const cartOverlay = document.getElementById('cartOverlay');
+  const cartItemsContainer = document.getElementById('cartItems');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const cartCountEl = document.getElementById('cartCount');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+
+  let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+  function updateCartUI() {
+    if (!cartItemsContainer || !cartTotalEl || !cartCountEl) return;
+
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p class="text-gray-500">Your cart is empty.</p>';
+    } else {
+      cart.forEach((item, i) => {
+        total += Number(item.price);
+        const row = document.createElement('div');
+        row.className = 'flex justify-between items-center mb-3';
+        row.innerHTML = `
+          <div class="flex items-center gap-3">
+            <img src="${item.img}" class="w-12 h-12 object-contain rounded" alt="${item.name}">
+            <div>
+              <p class="font-semibold">${item.name}</p>
+              <p class="text-gray-600 text-sm">$${item.price}</p>
+            </div>
+          </div>
+          <button class="text-red-500 remove-btn" data-index="${i}">✖</button>
+        `;
+        cartItemsContainer.appendChild(row);
+      });
+
+      // Add remove button functionality
+      cartItemsContainer.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = Number(btn.dataset.index);
+          cart.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          updateCartUI();
+        });
+      });
+    }
+
+    cartCountEl.textContent = cart.length;
+    cartTotalEl.textContent = `$${total.toFixed(2)}`;
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  // Open/close cart drawer
+  cartBtn.addEventListener('click', () => {
+    cartDrawer.classList.remove('translate-x-full');
+    cartOverlay.classList.remove('hidden');
+  });
+  closeCart.addEventListener('click', () => {
+    cartDrawer.classList.add('translate-x-full');
+    cartOverlay.classList.add('hidden');
+  });
+  cartOverlay.addEventListener('click', () => {
+    cartDrawer.classList.add('translate-x-full');
+    cartOverlay.classList.add('hidden');
+  });
+
+  // Checkout button
+  checkoutBtn?.addEventListener('click', () => {
+    if (cart.length === 0) return alert('Your cart is empty!');
+    const total = cart.reduce((sum, item) => sum + Number(item.price), 0).toFixed(2);
+    alert(`Total amount: $${total}\nCheckout flow not implemented — demo only.`);
+  });
+
+  // Initial render
+  updateCartUI();
+
+  /* Floating icons (sides + bottom, slow, spaced => no overlap) */
+  const icons = [
+    './img/icons/adidas.png', './img/icons/leaves.png', './img/icons/behance.png',
+    './img/icons/Puma.png', './img/icons/Nike.png', './img/icons/Louis-Vuitton.png',
+    './img/icons/Lululemon.png', './img/icons/Vans.png', './img/icons/Gucci.png',
+    './img/icons/twitch.png', './img/icons/simple.png'
+  ];
+
+  const container = document.getElementById('iconsContainer');
+  const positions = ['left', 'right', 'bottom']; 
+  let idx = 0;
+
+  positions.forEach(pos => {
+    for (let i = 0; i < 4; i++) {
+      const icon = document.createElement('img');
+      icon.src = icons[idx % icons.length];
+      icon.className = 'floating-icon';
+      const size = 44 + Math.random() * 26; 
+      icon.style.width = size + 'px';
+      icon.style.height = size + 'px';
+      if (pos === 'left') {
+        icon.style.left = '2%';
+        icon.style.top = (16 + i * 20) + '%';
+        icon.style.animation = `floatVertical ${11 + Math.random() * 5}s ease-in-out infinite`;
+      } else if (pos === 'right') {
+        icon.style.right = '2%';
+        icon.style.top = (16 + i * 20) + '%';
+        icon.style.animation = `floatVertical ${11 + Math.random() * 5}s ease-in-out infinite`;
+      } else {
+        icon.style.left = (15 + i * 20) + '%';
+        icon.style.bottom = '6%';
+        icon.style.animation = `floatBottom ${13 + Math.random() * 6}s ease-in-out infinite`;
+      }
+      container.appendChild(icon);
+      idx++;
+    }
+  });
+</script>
+
+</body>
+</html>
